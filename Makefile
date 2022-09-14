@@ -1,6 +1,6 @@
 CC      := clang
-CFLAGS  := -c -fstack-protector-strong -O2 -Wall -Wextra -Wpedantic
-LDFLAGS := -O2 -fuse-ld=lld
+CFLAGS  := -c -fstack-protector-strong -O0 -g -Wall -Wextra -Wpedantic
+LDFLAGS := -O0 -fuse-ld=lld
         
 OBJ     := main.o
 TARGET  := bar
