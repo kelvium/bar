@@ -11,6 +11,6 @@ int main(void)
 	meminfoUpdate();
 	dateGet(date, sizeof(date));
 
-	printf("\uf15b %zu MiB \uf7c9 %zu MiB \uf133 %s", meminfoAvailable() / 1024, diskUsed("/") / 1024 / 1024, date);
+	printf("\uf15b %zu MiB \uf7c9 %zu MiB \uf133 %s", meminfoUsed() / 1024, diskUsed("/") / 1024 / 1024, date);
 	return 0;
 }

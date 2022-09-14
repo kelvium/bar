@@ -12,10 +12,9 @@ static uint64_t sFree      = 0;
 static uint64_t sAvailable = 0;
 
 uint64_t meminfoTotal() { return sTotal; }
-
 uint64_t meminfoFree() { return sFree; }
-
 uint64_t meminfoAvailable() { return sAvailable; }
+uint64_t meminfoUsed() { return sTotal - sAvailable; }
 
 static uint64_t sGetField(const char* buffer, const char* field)
 {
