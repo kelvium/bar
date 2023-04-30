@@ -8,15 +8,6 @@
 #include <time.h>
 #include <unistd.h>
 
-static uint64_t sMeminfoTotal     = 0;
-static uint64_t sMeminfoFree      = 0;
-static uint64_t sMeminfoAvailable = 0;
-
-uint64_t meminfoTotal(void) { return sMeminfoTotal; }
-uint64_t meminfoFree(void) { return sMeminfoFree; }
-uint64_t meminfoAvailable(void) { return sMeminfoAvailable; }
-uint64_t meminfoUsed(void) { return sMeminfoTotal - sMeminfoAvailable; }
-
 static uint64_t sGetField(const char* buffer, const char* field)
 {
 	char* position = strstr(buffer, field);
@@ -26,7 +17,7 @@ static uint64_t sGetField(const char* buffer, const char* field)
 	return value;
 }
 
-void meminfoUpdate(void)
+void meminfoFill(Meminfo* self)
 {
 	char buffer[2048] = { 0 };
 	FILE* fd;
@@ -35,9 +26,9 @@ void meminfoUpdate(void)
 	rewind(fd);
 	fread(buffer, sizeof(buffer), 1, fd);
 
-	sMeminfoTotal     = sGetField(buffer, "MemTotal:");
-	sMeminfoFree      = sGetField(buffer, "MemFree:");
-	sMeminfoAvailable = sGetField(buffer, "MemAvailable:");
+	self->total     = sGetField(buffer, "MemTotal:");
+	self->free      = sGetField(buffer, "MemFree:");
+	self->available = sGetField(buffer, "MemAvailable:");
 
 	fclose(fd);
 }

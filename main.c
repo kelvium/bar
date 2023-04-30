@@ -4,6 +4,8 @@
 #include <string.h>
 #include <unistd.h>
 
+static Meminfo sMeminfo;
+
 enum {
 	OPTION_ONCE,
 	OPTION_LOOP,
@@ -13,10 +15,10 @@ static void printInfo(void)
 {
 	char date[64] = { 0 };
 
-	meminfoUpdate();
+	meminfoFill(&sMeminfo);
 	dateGet(date, sizeof(date));
 
-	printf("\uf15b %zu MiB \uf7c9 %zu MiB \uf133 %s", meminfoUsed() / 1024, diskUsed("/") / 1024 / 1024, date);
+	printf("\uf15b %zu MiB \uf7c9 %zu MiB \uf133 %s", (sMeminfo.total - sMeminfo.available) / 1024, diskUsed("/") / 1024 / 1024, date);
 }
 
 static void printUsage(const char* name)

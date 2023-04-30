@@ -3,11 +3,13 @@
 #include <stddef.h>
 #include <stdint.h>
 
-void meminfoUpdate(void);
-uint64_t meminfoTotal(void);
-uint64_t meminfoFree(void);
-uint64_t meminfoAvailable(void);
-uint64_t meminfoUsed(void);
+typedef struct {
+	uint64_t total;
+	uint64_t free;
+	uint64_t available;
+} Meminfo;
+
+void meminfoFill(Meminfo* self);
 
 uint64_t diskUsed(const char* path);
 uint64_t diskFree(const char* path);
