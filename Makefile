@@ -2,7 +2,7 @@ CC      := clang
 CFLAGS  := -c -fstack-protector-strong -O2 -g -Wall -Wextra -Wpedantic
 LDFLAGS := -O2 -fuse-ld=lld
         
-OBJ     := main.o meminfo.o date.o disk.o
+OBJ     := main.o basic.o
 TARGET  := bar
 
 .PHONY: all

@@ -1,6 +1,4 @@
-#include "meminfo.h"
-#include "date.h"
-#include "disk.h"
+#include "basic.h"
 
 #include <stdio.h>
 
