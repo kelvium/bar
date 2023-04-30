@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/statvfs.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -33,18 +32,12 @@ void meminfoFill(Meminfo* self)
 	fclose(fd);
 }
 
-uint64_t diskUsed(const char* path)
+void diskinfoFill(Diskinfo* self, const char* path)
 {
-	struct statvfs diskStat;
-	statvfs(path, &diskStat);
-	return (diskStat.f_bsize * diskStat.f_blocks) - (diskStat.f_bsize * diskStat.f_bfree);
-}
-
-uint64_t diskFree(const char* path)
-{
-	struct statvfs diskStat;
-	statvfs(path, &diskStat);
-	return diskStat.f_bsize * diskStat.f_bfree;
+	statvfs(path, &self->_stat);
+	self->total = self->_stat.f_bsize * self->_stat.f_blocks;
+	self->free  = self->_stat.f_bsize * self->_stat.f_bfree;
+	self->used  = self->total - self->free;
 }
 
 void dateGet(char* buffer, size_t bufferSize)
