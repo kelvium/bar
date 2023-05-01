@@ -1,4 +1,5 @@
 #include "basic.h"
+#include "alsa.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -20,7 +21,8 @@ static void printInfo(void)
 	diskinfoFill(&sDiskinfo, "/");
 	dateGet(date, sizeof(date));
 
-	printf("\uf15b %zu MiB \uf7c9 %zu MiB \uf133 %s",
+	printf("\uf7cd %u%% \uf15b %zu MiB \uf7c9 %zu MiB \uf133 %s",
+		alsaVolume(),
 		(sMeminfo.total - sMeminfo.available) / 1024,
 		sDiskinfo.used / 1024 / 1024,
 		date);
