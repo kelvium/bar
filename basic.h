@@ -2,7 +2,6 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include <sys/statvfs.h>
 
 typedef struct {
 	uint64_t total;
@@ -13,8 +12,6 @@ typedef struct {
 void meminfoFill(Meminfo* self);
 
 typedef struct {
-	struct statvfs _stat;
-
 	uint64_t total;
 	uint64_t free;
 	uint64_t used;
