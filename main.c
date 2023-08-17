@@ -21,16 +21,17 @@ static void printInfo(void)
 	diskinfoFill(&sDiskinfo, "/");
 	dateGet(date, sizeof(date));
 
-	printf("󰋋 %u%%  %zu MiB 󰋊 %zu MiB  %s",
+	printf("󰋋 %u%%  %zu MiB 󰋊 %zu MiB  %s\n",
 		alsaVolume(),
 		(sMeminfo.total - sMeminfo.available) / 1024,
 		sDiskinfo.used / 1024 / 1024,
 		date);
+	fflush(stdout);
 }
 
 static void printUsage(const char* name)
 {
-	printf("%s [(once|loop)]", name);
+	printf("%s [(once|loop)]\n", name);
 }
 
 int main(int argc, char** argv)

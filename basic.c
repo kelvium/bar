@@ -76,5 +76,6 @@ void dateGet(char* buffer, size_t bufferSize)
 	struct tm* timeInfo;
 	time(&rawTime);
 	timeInfo = localtime(&rawTime);
-	snprintf(buffer, bufferSize, "%s", asctime(timeInfo)); /* FIXME: asctime is deprecated! */
+	size_t written = snprintf(buffer, bufferSize, "%s", asctime(timeInfo)); /* FIXME: asctime is deprecated! */
+	buffer[written - 1] = '\0'; /* remove the \n */
 }
